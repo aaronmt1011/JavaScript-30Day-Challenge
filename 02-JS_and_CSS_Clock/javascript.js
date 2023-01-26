@@ -8,7 +8,7 @@ function setDate() {
     // variable now grabs the current date - which also includes current time
     const now = new Date();
 
-    
+
 
     // second part of clock
     // .getSeconds() is used to get current seconds
@@ -46,7 +46,6 @@ function setDate() {
     // .style.transform rotates the hourHand (div) to match up with how it would
     // it would look like on a regular clock
     hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-    console.log(mins);
 }
 
 // setInterval() sets intervals to a second with casues setDate() to function
