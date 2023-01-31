@@ -1,4 +1,4 @@
-<h1>Project 4: Array "Cardio Day"<h1>
+<h1>Project 4: Array "Cardio Day"</h1>
 <p>This project involves practicing functions on arrays.</P>
 <p>This means that the site will <b>NOT</b> have a site.</p>
 <p>Look at console to see the cool stuff or to practice for yourself.</p>
