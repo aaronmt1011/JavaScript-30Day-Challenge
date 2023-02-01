@@ -121,34 +121,48 @@ console.table(oldest);
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 // The following code should be dont on the link provided.
 // Used console inspector to find relevant data for links
-const category = document.querySelector('.mw-category');
+// const category = document.querySelector('.mw-category');
 
-// put all links (a tag) from .mw-category class into links array
+// Put all links (a tag) from .mw-category class into links array
 // Array.from is used due to .querySelectorAll() returning a nodelist and the
 // need to convert it into an array
-const links = Array.from(category.querySelectorAll('a'));
+// const links = Array.from(category.querySelectorAll('a'));
 
-// coulde also have converted all links into arrays putting the links straight
+// Could also have converted all links into arrays putting the links straight
 // into an array by using array brackets and ...
 // ... means all stuff is put in intervals into array index
-/*
-const links = [...category.querySelectorAll('a')];
-*/
+// const links = [...category.querySelectorAll('a')];
+
 
 // .map is used on links array to return array with just textContent form a tag
 // .filter is used to return array indexes that include 'de' in name
-const de = links
-            .map(link => link.textContent)
-            .filter(streetName => streetName.includes('de'));
+// const de = links
+//            .map(link => link.textContent)
+//           .filter(streetName => streetName.includes('de'));
 // use console.log(de) to see full results after putting the code from above
   
 
   
 // 7. sort Exercise
 // Sort the people array alphabetically by last name. Harder due to lack of object
-const alpha = people.sort(function() {
+// in the people array.
 
+// .sort() is used on people array to compare each index to each other.
+// Each people array index will be sorted into the var lastOne & nextOne.
+// Should display the new arranged array in our created alpha array.
+const alpha = people.sort(function(lastOne, nextOne) {
+  // .split() is used to seperate each var (lastOne, nextOne) into seperate var
+  // lLast & lFirst for lastOne and nLast & nFirst for nextOne.
+  // We really only want lLast & nLast due to arranging by last name.
+  const [lLast, lFirst] = lastOne.split(', ');
+  const [nLast, nFirst] = nextOne.split(', ');
+
+  // Ternary operator is used to compared lLast & nLast from above. They are 
+  //  then put higher or lower on the array indexlist.
+  return lLast > nLast ? 1 : -1;
 });
+
+console.log(alpha);
 
 
 // 8. Reduce Exercise
