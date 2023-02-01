@@ -82,10 +82,39 @@ body {
 
 
 /*
-
+The following code gives the words the desired effect of coming in and out of the screen
+from top and bottom.
 */
-.panel > *:first-child { transform: translatey(-100%); }
-.panel > *:last-child { transform: translatey(100%); }
+
+/* 
+Transform is used on the first-child of flex div of .panel div to cause
+it to appear off of screen from top part
+*/
+.panel > *:first-child { transform: translateY(-100%); }
+
+/* 
+Transform is used on the first-child of flex div of .panel div when its active.
+This is used to make words appear back on screen when class .open-active is
+added to .panel div.
+*/
+.panel.open-active > *:first-child { transform: translateY(0); }
+
+
+
+/* 
+Transform is used on the last-child of flex div of .panel div to cause
+it to appear off of screen from bottom part
+*/
+.panel > *:last-child { transform: translateY(100%); }
+
+/* 
+Transform is used on the last-child of flex div of .panel div when its active.
+This is used to make words appear back on screen when class .open-active is
+added to .panel div.
+*/
+.panel.open-active > *:last-child { transform: translateY(0); }
+
+
 
 .panel p {
     text-transform: uppercase;
@@ -99,5 +128,10 @@ body {
 }
 
 .panel.open {
+    /* 
+    flex: 5; causes the .panel div (image panel) to take 5 times the space
+    compared to the other .panel div when .open class is added.
+     */
+    flex: 5;
     font-size: 40px;
 }
