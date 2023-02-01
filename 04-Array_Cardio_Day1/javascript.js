@@ -150,10 +150,11 @@ console.table(oldest);
 // .sort() is used on people array to compare each index to each other.
 // Each people array index will be sorted into the var lastOne & nextOne.
 // Should display the new arranged array in our created alpha array.
-const alpha = people.sort(function(lastOne, nextOne) {
+const alpha = people.sort((lastOne, nextOne) => {
+
   // .split() is used to seperate each var (lastOne, nextOne) into seperate var
   // lLast & lFirst for lastOne and nLast & nFirst for nextOne.
-  // We really only want lLast & nLast due to arranging by last name.
+  // Only want lLast & nLast due to arranging by last name.
   const [lLast, lFirst] = lastOne.split(', ');
   const [nLast, nFirst] = nextOne.split(', ');
 
@@ -169,3 +170,27 @@ console.log(alpha);
 // Sum up the instances of each of these
 const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
   
+// .reduce() is used on data array to check how much times each occurred.
+// Each index is broken down into an and added to object obj.
+// This allows us to keep count on each item.
+
+// Each index from the data array is going to be passed through the .reduce()
+// and put into the obj var below. The item var will be used as counter.
+// This also means we can add as much new indexes to the data array and they
+// should all be passed through .reduce(). Remember, start with a blank object.
+const transportation = data.reduce(function(obj, item) {
+
+  // The if statement below is used to initialize the count for that item if
+  // the item had nothing in it. Only works if item is undefined (no number).
+  if(!obj[item]) {
+    obj[item] = 0;
+  }
+
+  // Gives a counter to the item in the obj and returns it.
+  obj[item]++;
+  return obj;
+
+// The {} below with nothing in it is the blank object.
+}, {});
+
+console.log(transportation);
