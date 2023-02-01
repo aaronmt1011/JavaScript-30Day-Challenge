@@ -17,6 +17,9 @@ body {
 .panels {
     min-height: 100vh;
     overflow: hidden;
+
+    /* We need to put display to flex to work with flex properties */
+    display: flex;
 }
 
 .panel {
@@ -34,6 +37,25 @@ body {
     font-size: 20px;
     background-size: cover;
     background-position: center;
+
+    /* 
+    The following code means flex: 1 1 0; which is:
+        flex-grow: 1;     // will grow in same proportion as window-size
+        flex-shrink: 1;   // will shrink in same proportion as window-size
+        flex-basis: 0;    // No starting value, divs will take up size avaiable.
+
+    flex: 1; is used on flex divs to spread out items to rest of space evenly
+    */
+    flex: 1;
+
+    /* 
+    Code below is used to create a flex container on the panel divs. A div
+    can be both a flex item and a flex container. 
+     */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -47,7 +69,23 @@ body {
     margin: 0;
     width: 100%;
     transition: transform 0.5s;
+
+    /*
+    Added flex properties to flex child of .panel div. Also made children flex
+    containers to center the child using flex code.
+    */
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
+/*
+
+*/
+.panel > *:first-child { transform: translatey(-100%); }
+.panel > *:last-child { transform: translatey(100%); }
 
 .panel p {
     text-transform: uppercase;
