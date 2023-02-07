@@ -33,6 +33,7 @@ function findMatches(wordToMatch, cities) {
 }
 
 
+
 // displayMatchers() is used to find display the possible matches below the input
 function displayMatches() {
     // matchArray var used findMatches() function to search for parts of items
@@ -41,15 +42,26 @@ function displayMatches() {
 
     // html var uses .map() to go through every index of matchArray array and to
     // use the arrow function to help with the layout of possible terms below
-    // input term. .join() is then used (due to .map() returning an array) to 
-    // return possible strings as a string instead of multiple items from array.
     const html = matchArray.map(place => {
+
+        // regex var uses RegExp() to find matches with g & i flags
+        const regex = new RegExp(this.value, 'gi');
+        
+        // cityName var & stateName var uses replace() on regex var to replace 
+        // parts of possible matched words from matchArray array with a 
+        // highlighted portion that matches the searched term.
+        const cityName = place.city.replace(regex, (match) => `<span class="hl">${match}</span>`);
+        const stateName = place.state.replace(regex, (match) => `<span class="hl">${match}</span>`);
+        console.log(cityName);
         return `
             <li>
-                <span class ="name">${place.city}, ${place.state}</span>
-                <span class ="population">${place.population}</span>
+                <span class = "name">${cityName}, ${stateName}</span>
+                <span class = "population">${place.population}</span>
             </li>
         `;
+
+    // input term. .join() is then used (due to .map() returning an array) to 
+    // return possible strings as a string instead of multiple items from array.
     }).join('');
     suggestions.innerHTML = html;
 }
