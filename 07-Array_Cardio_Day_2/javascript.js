@@ -86,5 +86,29 @@ console.log(comment);
 
 
 // Array.prototype.findIndex()
-// Find the comment with this ID
+// .findIndex() is used to find an array index.
+
+// Find the comment with this ID 823423
+
+// .findIndex() is used below to find array index that has the 
+// same object id number - 823423. Should be array index [1].
+const index = comments.findIndex(comment => comment.id === 823423);
+console.log(index);
+
+
+
 // delete the comment with the ID of 823423
+// can use .splice function to remove this part of the array index
+/*
+comments.splice(index, 1);
+console.table(comments);
+*/
+
+// Can also build a new array by using slice to combine parts of old array
+// into new array. We also have to pass old array into new array by using the
+// spread operator (...).
+const newComments = [
+    ...comments.slice(0, index),
+    ...comments.slice(index + 1)
+];
+console.table(newComments);
