@@ -21,8 +21,9 @@ const comments = [
 
 
 
-// Array.prototype.some() // is at least one person 19 or older?
 
+
+// Array.prototype.some() // is at least one person 19 or older?
 /*
 // .some() is used on the function to see if there is someone who matches task
 const isAdult = people.some(function(person) {
@@ -51,6 +52,8 @@ console.log({isAdult});
 
 
 
+
+
 // Array.prototype.every() // is everyone 19 or older?
 // Can use same code as above, just have to replace .some and add new var name.
 // .every is used to see if all people are 19 or older. Should be false due to
@@ -60,9 +63,26 @@ const allAdults = people.every(person =>
 console.log({allAdults});
 
 
+
+
 // Array.prototype.find()
-// Find is like filter, but instead returns just the one you are looking for
-// find the comment with the ID of 823423
+// Find returns just the one part of array that you are looking for
+// find the comment with the ID of 823423. Should be with text: "Super good".
+/*
+const comment = comments.find(function(comment) {
+    if(comment.id === 823423) {
+        return true;
+    }
+});
+*/
+
+// Below uses arrow function to shorten above code to one line. Don't necessarily 
+// need to write out full if condition since we only care about it being true.
+const comment = comments.find(comment => comment.id === 823423);
+console.log(comment);
+
+
+
 
 
 // Array.prototype.findIndex()
