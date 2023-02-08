@@ -16,7 +16,40 @@ const comments = [
 ];
 
 // Some and Every Checks
+// .some() checks to see if there is at least one part of array that matches
+// .every()
+
+
+
 // Array.prototype.some() // is at least one person 19 or older?
+
+/*
+// .some() is used on the function to see if there is someone who matches task
+const isAdult = people.some(function(person) {
+
+    // currentYear var gets the current date by using new Date() function along
+    // with .getFullYear() to get just the year
+    const currentYear = (new Date()).getFullYear();
+
+    // if is used to see if there is someone who is older than 19
+    if(currentYear - person.year >= 19) {
+        return true;
+    } 
+});
+
+// The code above can be simplified. The bottom is an example of this
+const isAdult = people.some(person => {
+    const currentYear = (new Date()).getFullYear();
+    return currentYear - person.year >= 19;
+});
+*/
+
+// Can be simplified even further.
+const isAdult = people.some(person => ((new Date()).getFullYear()) - person.year >= 19);
+console.log({isAdult});
+
+
+
 // Array.prototype.every() // is everyone 19 or older?
 
 // Array.prototype.find()
