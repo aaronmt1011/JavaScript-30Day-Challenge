@@ -33,7 +33,6 @@ function findMatches(wordToMatch, cities) {
 }
 
 
-
 // displayMatchers() is used to find display the possible matches below the input
 function displayMatches() {
     // matchArray var used findMatches() function to search for parts of items
@@ -53,10 +52,15 @@ function displayMatches() {
         const cityName = place.city.replace(regex, (match) => `<span class="hl">${match}</span>`);
         const stateName = place.state.replace(regex, (match) => `<span class="hl">${match}</span>`);
         console.log(cityName);
+
+        // for span class "population", we use the Number() function with 
+        // .toLocaleString to change from string to a number to get commas.
         return `
             <li>
                 <span class = "name">${cityName}, ${stateName}</span>
-                <span class = "population">${place.population}</span>
+                <span class = "population">
+                    ${Number(place.population).toLocaleString()}
+                </span>
             </li>
         `;
 
