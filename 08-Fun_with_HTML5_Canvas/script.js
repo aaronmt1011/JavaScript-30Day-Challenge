@@ -15,31 +15,79 @@ ctx.strokeStyle = '#BADA55';
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 
-// need isDrawing variable to be false to stop cursor from drawing when we don't
-// want it to draw (stop clicking)
-let isDrawing = false;
+// .lineWidth changes width of the line
+ctx.lineWidth = 0;
 
-// lastX and lastY are going tb be the starting points for the line
-// Should reset after user stops drawing and starts a new drawing.
+ctx.globalCompositeOperation = 'multiply';
+
+
+
+// need isDrawing variable to be false to stop cursor from drawing when we don't
+// want it to draw (stop clicking).
+// lastX and lastY variable are going to be the starting points for the line and
+// should reset after user stops drawing and starts a new drawing.
+// hue variable is going to be used as a counter to get a rainbow design for the
+// lines.
+// direction variable will dictate if line becomes wider or smaller
+let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
-
+let hue = 0;
+let direction = true;
 
 // uses event (cursor moving) to draw on context 
 function draw(e) {
     if(!isDrawing) return;  // stops drawing when mouse isn't pressed down
-    console.log(e);
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+
+    // beginPath() starts the creation of the line path
+    ctx.beginPath();
+
+    // moveTo() is the starting point of the line
+    // start from
+    ctx.moveTo(lastX, lastY);
+
+    // lineTo() tracks the movement of the cursor to draw line
+    // go to
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+    
+    hue++;
+    if(hue >= 360) {
+        hue = 0;
+    }
+    
+    // if statement below changes width of line depending on conditions
+    if(ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+        direction = !direction;
+    } 
+
+    // if statements below actually change the width of the line based off of
+    // whether the direction variable is true or not true
+    if(direction) {
+        ctx.lineWidth++;
+    } else {
+        ctx.lineWidth--;
+    }
 }
 
 // 4 addEventListener() are used to create drawing.
-// 1st addEventListener() creates drawing while mouse is moving
-// 2nd addEventListener() tracks if mouse is being clicked on and turns 
-// isDrawing to true
+// 1st addEventListener() tracks if mouse is being clicked on and turns 
+// isDrawing to true. Also updates the location of the line to a new area
+// to not have one continuous line.
+
+// 2nd addEventListener() creates drawing while mouse is moving
 // 3rd addEventListener() tracks if mouse is not being clicked on and turns 
 // isDrawing to false
 // 4th addEventListener() tracks if mouse is moved off of canvas area and turns 
 // isDrawing to false
+
+canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+
 canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mousedown', () => isDrawing = true);
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseout', () => isDrawing = false);
