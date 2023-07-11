@@ -29,6 +29,12 @@ function skip() {
     vid.currentTime += parseFloat(this.dataset.skip);
 }
 
+// handRangeUpdate() makes the volume and speed ranges match the value itself.
+// This allows the value to change the volume/speed property itself.
+function handRangeUpdate() {
+    vid[this.name] = this.value;
+}
+
 
 vid.addEventListener('click', togglePlay);
 vid.addEventListener('play', updateButton);
@@ -36,3 +42,5 @@ vid.addEventListener('pause', updateButton);
 
 tog.addEventListener('click', togglePlay);
 skipBut.forEach(button => button.addEventListener('click', skip));
+ranges.forEach(range => range.addEventListener('change', handRangeUpdate));
+ranges.forEach(range => range.addEventListener('mousemove', handRangeUpdate));
