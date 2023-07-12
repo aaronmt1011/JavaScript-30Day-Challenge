@@ -60,4 +60,4 @@ fetch('https://api.github.com/users/aaronmt1011')
     .then(data => {
         console.timeEnd('This is only hear to take your time while data is being fetched.');
         console.log(data);
-    });
+});
