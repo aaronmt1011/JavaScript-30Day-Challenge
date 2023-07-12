@@ -7,6 +7,7 @@ const progBar = document.querySelector('.progress__filled');
 const tog = document.querySelector('.toggle');
 const skipBut = document.querySelectorAll('[data-skip]');
 const ranges = document.querySelectorAll('.player__slider');
+let mousedown = false;
 
 // togglePlay() toggles video to stop or start
 function togglePlay() {
@@ -35,12 +36,45 @@ function handRangeUpdate() {
     vid[this.name] = this.value;
 }
 
+// handProgress() makes the progress bar match up to the video
+function handProgress() {
+    const percent = (vid.currentTime / vid.duration) * 100;
+
+    // flexBasis is the style that will change the width of the progress bar
+    progBar.style.flexBasis = `${percent}%`;
+}
+
+
+// scrub() causes the progress bar to affect the video progress based off of
+// where user presses or moves to
+function scrub(e) {
+    // prog.offsetWidth is used to get the full progress bar size
+    const scrubTime = (e.offsetX / prog.offsetWidth) * vid.duration;
+    vid.currentTime = scrubTime;
+}
 
 vid.addEventListener('click', togglePlay);
 vid.addEventListener('play', updateButton);
 vid.addEventListener('pause', updateButton);
+vid.addEventListener('timeupdate', handProgress);
 
 tog.addEventListener('click', togglePlay);
 skipBut.forEach(button => button.addEventListener('click', skip));
 ranges.forEach(range => range.addEventListener('change', handRangeUpdate));
 ranges.forEach(range => range.addEventListener('mousemove', handRangeUpdate));
+
+prog.addEventListener('click', scrub);
+
+// the addEventListener below is a simplified version of the addEventListener below it
+// 
+prog.addEventListener('mousemove', (e) => mousedown && scrub(e));
+/*
+prog.addEventListener('mousemove', () => {
+    if(mousedown) {
+        scrub();
+    }
+});
+*/
+
+prog.addEventListener('mousemove', () => mousedown = true);
+prog.addEventListener('mouseup', () => mousedown = false);
