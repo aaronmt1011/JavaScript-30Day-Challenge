@@ -36,20 +36,21 @@ h1 {
     margin-left: 20px;
 }
 
-.slide-in {
+.images {
     opacity: 0;
     transition: all .5s;
 }
 
-.align-left.slide-in {
+.align-left.images {
     transform: translateX(-30%) scale(0.95);
 }
 
-.align-right.slide-in {
+.align-right.images {
     transform: translateX(30%) scale(0.95);
 }
 
-.slide-in.active {
+/* This class will be used to move the images back to 'normal' */
+.images.active {
     opacity: 1;
     transform: translateX(0%) scale(1);
 }
