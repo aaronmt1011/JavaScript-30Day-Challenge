@@ -1,3 +1,2 @@
 <h1>Project 13: Slide in on Scroll</h1>
-<p>This project is focused on using scroll events.</p>
-<p>Will update once finished.</p>
+<p>This project is focused on using math to cause an image to appear once user has scrolled halfway through the windows page. The image will then disappear when the image has come out of view of the windows page so that the effect can be done when user slides up. The full details of the project can be seen in the comment sections of the JS file. </p>
