@@ -1,3 +1,3 @@
 <h1>Project 14: Reference vs. Copy</h1>
 <p>This project is focused on discussing the differences between references and copy. This project is focused mainly on the fundamentals of javascript. There will be no web page.</p>
-<p>Will update once finished.</p>
+<p>Use this as a future guide for clarificcation in the future. Copying can lead to unwanted references which can lead to messed up code. Use certain copying procedures for best results. Extra comments can be found in the comments of the JS file.</p>
