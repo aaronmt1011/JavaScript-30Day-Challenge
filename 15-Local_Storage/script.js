@@ -1,6 +1,11 @@
 const addItems = document.querySelector('.add-items');
 const itemsList = document.querySelector('.plates');
-const items = [];
+
+/* 
+JSON.parse(localStorage.getItem('items')) is used to get the items array from
+the localStorage first. If nothing is there then it gets a blank array.
+*/
+const items = JSON.parse(localStorage.getItem('items')) || [];
 
 function addItem(e) {
     /*
@@ -31,6 +36,28 @@ function addItem(e) {
 
     // use populateList and passes through items and itemsList for parameters
     populateList(items, itemsList);
+
+
+
+    /*
+    adding anything besides a string to a localStorage turns the it into a 
+    string because localStorage cannot handle anything but strings.
+    */
+    // localStorage.setItem('items', items);
+    
+
+    /* 
+    To fix problem, we have to convert items into a string using 
+    JSON.stringify. JSON.stringify converts anything in it into a long string. 
+    To find proof that items is converted to a long string, type up various
+    dishes and add them. Then go to dev tools and head straight to the console
+    tab. Open that badboy up and type in localStorage.getItem('items') to see
+    a nice long string reproduced. This string can be converted back into an
+    array of object but it requres using JSON.parse(localStorage.getItem()).
+    */
+    localStorage.setItem('items', JSON.stringify(items));
+
+
 
     /*
     'this' is a form element which means it has various functions attached to it.
@@ -84,3 +111,6 @@ Adding a 'submit' instead of a 'click' will enable the .addEventListener to
 react to a variety of listeners instead of just 'click'.
 */
 addItems.addEventListener('submit', addItem);
+
+
+populateList(items, itemsList);
