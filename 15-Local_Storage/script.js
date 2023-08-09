@@ -34,9 +34,8 @@ function addItem(e) {
     // use .push to push new item objs into items array.
     items.push(item);
 
-    // use populateList and passes through items and itemsList for parameters
+    // use populateList function to pass through items and itemsList for list
     populateList(items, itemsList);
-
 
 
     /*
@@ -56,7 +55,6 @@ function addItem(e) {
     array of object but it requres using JSON.parse(localStorage.getItem()).
     */
     localStorage.setItem('items', JSON.stringify(items));
-
 
 
     /*
@@ -79,7 +77,6 @@ platesList is used as a new element for the items to be added too.
 */
 function populateList(plates = [], platesList) {
 
-
     /*
     The following can be broken down into a couple of steps:
         1) Loops through every object in the plates array using map
@@ -89,6 +86,7 @@ function populateList(plates = [], platesList) {
             will return strings, not arrays. 
     */
     platesList.innerHTML = plates.map((plate, i) => {
+        
         /*
         used data-index=${i} to link the input and the label together.
         cannot use check="false" because it will still check everything. Having
@@ -97,12 +95,66 @@ function populateList(plates = [], platesList) {
         */
         return `
             <li>
-                <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''}/>
+                <input type="checkbox" data-index=${i} id="item${i}" 
+                    ${plate.done ? 'checked' : ''}/>
                 <label for="item${i}">${plate.text}</label>
             </li>
         `;
     }).join('');
 }
+
+
+/* 
+toggleDone() is going to keep track of the checkmarks to keep items checked, even
+if user reloads the page.
+*/
+function toggleDone(e) {
+    
+    /* 
+    Have to use .target.matches() due to the itemsList.addEventListener() targeting
+    every part of the list area. Need to listen for the click of the checkmarks and
+    nothing else.
+    */
+    if(!e.target.matches('input')) return;
+
+    /*
+    element var is used to get the target of the click
+    */
+    const element = e.target;
+
+    /*
+    index var will use the checkbox 'data-index=${i}' to keep track of which 
+    item was checked.
+    */
+    const index = element.dataset.index;
+
+    /*
+    The item object property 'done: false' will be toggled to true (if false) or
+    to false (if true). 
+    */
+    items[index].done = !items[index].done;
+
+    /*
+    Call this string again to store the checked items into the localStorage
+    */
+    localStorage.setItem('items', JSON.stringify(items));
+
+    /*
+    populateList() will be used to update the page and to make sure this function
+    works, even if user reloads page after checking each mark.
+    */
+    populateList(items, itemsList);
+}
+
+
+/*
+If we tried to use the following code, it will not work properly. This is due to
+the items not existing since populateList() has not run yet. Even if we placed 
+populateList() above this code, it will not work properly. Everything will covered,
+including the input box and the button.
+*/
+// const checkBoxes = document.querySelectorAll('input');
+// checkBoxes.forEach(input => input.addEventListener('click', () => alert('hi')));
 
 
 
@@ -112,5 +164,15 @@ react to a variety of listeners instead of just 'click'.
 */
 addItems.addEventListener('submit', addItem);
 
+/*
+This will be used to check for any clicks that happen inside of the plates 
+unordered list.
+*/
+itemsList.addEventListener('click', toggleDone);
 
+/*
+use populateList function to pass through items and itemsList for list. Having 
+this function here and using localStorage (with JSON functions) helps keep the
+list on the site, even if user reloads the page.
+*/
 populateList(items, itemsList);
