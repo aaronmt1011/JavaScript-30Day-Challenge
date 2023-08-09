@@ -1,2 +1,2 @@
 <h1>Project 15: Local Storage & Event Delegation</h1>
-<p>This project is focused on local storage and event delegation. Will update once project is done.</p>
+<p>This project is focused on local storage and event delegation. Local storage is used to keep track of adding new items to the food list and to bring up the food list, even if user reloads page. Event delegation is used to keep track of the checkmarks and to keep them checked (if checked), even if user reloads page.</p>
