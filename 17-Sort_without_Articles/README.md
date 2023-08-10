@@ -1,2 +1,2 @@
 <h1>Project 17: Sort Without Articles</h1>
-<p>This project is focused on sorting elements based off of what their text context is. Will update once project is finished.</p>
+<p>This project is focused on sorting musicians alphabetically. The challenge is that there are no names or values attached to each musician. The makes this challenge a bit more difficult. To get the solution and details of each part of the solution, please look at the JS file.</p>
