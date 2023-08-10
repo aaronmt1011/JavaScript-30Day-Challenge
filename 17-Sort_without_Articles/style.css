@@ -8,7 +8,7 @@ body {
     min-height: 100vh;
 }
 
-#bands {
+#musicians {
     /* list-style can set all list style properties at once */    
     list-style: inside square;
     font-size: 20px;
@@ -19,12 +19,12 @@ body {
     box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
-#bands li {
+#musicians li {
     border-bottom: 1px solid #efefef;
     padding: 20px;
 }
 
-#bands li:last-child {
+#musicians li:last-child {
     border-bottom: 0;
 }
 
